@@ -1,7 +1,6 @@
-
 import { businesses } from "./data/businesses.js";
 
-
+// Render homepage business cards
 let businessHTML = '';
 
 businesses.forEach((business) => {
@@ -19,23 +18,27 @@ businesses.forEach((business) => {
 `;
 });
 
+// Inject generated cards into the DOM
 document.querySelector('.js-business-card-grid').innerHTML = businessHTML;
 
+// Select all rendered business cards for event handling
 export const businessCard = document.querySelectorAll('.js-business-detail');
 
+// Attach click event to each card to store business ID and redirect to detail page
 businessCard.forEach((card, index) => {
   card.addEventListener('click', () => {
-    const businessId = businesses[index].id;
-    localStorage.setItem("selectedBusinessId", businessId);
-    window.location.href = "business-detail.html";
+    const businessId = businesses[index].id; // Retrieve business ID
+    localStorage.setItem("selectedBusinessId", businessId); // Store selected ID
+    window.location.href = "business-detail.html"; // Navigate to detail page
   });
 });
 
+// -------------------------- Search Functionality --------------------------
 
-//Search bar filtering implementation
-const searchInput = document.querySelector('.input');
-const searchButton = document.querySelector('.search-button');
+const searchInput = document.querySelector('.input'); // Reference to search input field
+const searchButton = document.querySelector('.search-button'); // Reference to search button
 
+// Function to render business cards from a filtered list
 function renderBusinesses(filteredBusinesses) {
   let businessHTML = '';
 
@@ -54,9 +57,10 @@ function renderBusinesses(filteredBusinesses) {
     `;
   });
 
+  // Update the DOM with the new filtered list
   document.querySelector('.js-business-card-grid').innerHTML = businessHTML;
 
-  // Reattach click listeners
+  // Reattach click events to the newly rendered cards
   document.querySelectorAll('.js-business-detail').forEach((card, index) => {
     card.addEventListener('click', () => {
       const selectedBusiness = filteredBusinesses[index];
@@ -66,25 +70,26 @@ function renderBusinesses(filteredBusinesses) {
   });
 }
 
-// Initial render
+// Initial render of all businesses
 renderBusinesses(businesses);
 
-// Filter and render on search
+// Handle search on button click
 function handleSearch() {
-  const query = searchInput.value.trim().toLowerCase();
+  const query = searchInput.value.trim().toLowerCase(); // Get user input
 
+  // Filter businesses by name, category, or brief description
   const filtered = businesses.filter(business =>
     business.name.toLowerCase().includes(query) ||
     business.category.toLowerCase().includes(query) ||
     business.description.brief.toLowerCase().includes(query)
   );
 
-  renderBusinesses(filtered);
+  renderBusinesses(filtered); // Display filtered results
 }
 
-searchButton.addEventListener('click', handleSearch);
+searchButton.addEventListener('click', handleSearch); // Search on button click
 
-// Optional: also search on Enter key press
+// Optional: trigger search on Enter key
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') handleSearch();
 });

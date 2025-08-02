@@ -1,13 +1,16 @@
 import { businesses } from "../main/data/businesses.js";
 
-const selectedBusinessId = localStorage.getItem("selectedBusinessId");
-const selectedBusiness = businesses.find(biz => biz.id === selectedBusinessId);
+const selectedBusinessId = localStorage.getItem("selectedBusinessId"); // Retrieve stored business ID
+const selectedBusiness = businesses.find(biz => biz.id === selectedBusinessId); // Find matching business
 
 let businessDetailHTML = '';
 
 if (selectedBusiness) {
-  const { name, description, image, contact, hours, comments } = selectedBusiness;
+  const { name, description, image, contact, hours, comments } = selectedBusiness; // Destructure details
 
+  document.title = selectedBusiness.name; // Set page title to business name
+
+  // Build comments section
   const commentHTML = Object.entries(comments || {}).map(([user, { rating, text }]) => `
     <div class="comment">
       <div class="comment-header">
@@ -20,6 +23,7 @@ if (selectedBusiness) {
     </div>
   `).join('');
 
+  // Construct full business detail HTML
   businessDetailHTML = `
     <div class="image-flex">
       <div class="business-image-flex">
@@ -60,8 +64,9 @@ if (selectedBusiness) {
       ${commentHTML}
     </div>
   `;
+
 } else {
   businessDetailHTML = `<p>Business not found. Please go back and select one again.</p>`;
 }
 
-document.querySelector('.js-business-image').innerHTML = businessDetailHTML;
+document.querySelector('.js-business-image').innerHTML = businessDetailHTML; // Inject business details into page

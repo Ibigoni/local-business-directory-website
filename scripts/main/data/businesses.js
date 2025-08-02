@@ -1,3 +1,4 @@
+//An array of objects that stores the data of each business
 export const businesses = [
   {
     id: "2a50bc06-45e1-4b1b-ba8f-73ccf0721125",
