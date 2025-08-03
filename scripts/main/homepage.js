@@ -33,7 +33,7 @@ businessCard.forEach((card, index) => {
   });
 });
 
-// -------------------------- Search Functionality --------------------------
+// -------------------------- Search Functionality -------------------------
 
 const searchInput = document.querySelector('.input'); // Reference to search input field
 const searchButton = document.querySelector('.search-button'); // Reference to search button
@@ -89,7 +89,7 @@ function handleSearch() {
 
 searchButton.addEventListener('click', handleSearch); // Search on button click
 
-// Optional: trigger search on Enter key
+// Additional functionality trigger search on Enter key
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') handleSearch();
 });
