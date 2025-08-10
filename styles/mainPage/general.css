@@ -129,6 +129,7 @@ main section {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .business-name-rating h3 {

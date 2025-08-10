@@ -611,5 +611,5 @@ export const businesses = [
         text: "The store smells amazing and is beautifully set up. Great gift ideas too!"
       }
     }
-  },
+  }
 ];
